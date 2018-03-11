@@ -1,0 +1,78 @@
+{
+  "name": "es6_rollup_seed",
+  "version": "1.0.0",
+  "description": "an npm build environment that implements rollup.js",
+  "main": "index.js",
+  "watch": {
+    "watch:html": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "html"
+    },
+    "watch:js": {
+      "patterns": [
+        "src/js"
+      ],
+      "extensions": "js"
+    },
+    "watch:img": {
+      "patterns": [
+        "src/img"
+      ],
+      "extensions": "jpg,png,svg,gif"
+    },
+    "watch:css": {
+      "patterns": [
+        "src/scss"
+      ],
+      "extensions": "scss"
+    }    
+  },
+  "scripts": {
+    "test": "npm run test",
+    "start": "run-s init:*",
+    "init:create-folders": "mkdirp build/js build/css build/img",
+    "init:copy-content": "run-s copy-html",
+    "init:start": "run-p serve watch:*",
+    "serve": "lite-server -c bs-config.json",
+    "watch:html": "npm-watch copy-html",
+    "watch:js": "npm-watch compile-js",
+    "watch:img": "npm-watch copy-images",
+    "watch:css": "npm-watch compile-css",
+    "copy-html": "cpx src/*.html build",
+    "compile-js": "rollup -c",
+    "copy-images": "cpx src/img/*.* build/img",
+    "compile-css": "node-sass --output-style expanded --source-map true src/scss/app.scss --output build/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sean-olson/build_environments.git"
+  },
+  "keywords": [
+    "rollup",
+    "build",
+    "tool",
+    "npm"
+  ],
+  "author": "Sean Olson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sean-olson/build_environments/issues"
+  },
+  "homepage": "https://github.com/sean-olson/build_environments#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "cpx": "^1.5.0",
+    "lite-server": "^2.3.0",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
+    "npm-watch": "^0.3.0",
+    "rollup": "^0.56.5",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^9.0.0",
+    "rollup-plugin-node-resolve": "^3.2.0",
+    "rollup-plugin-replace": "^2.0.0"
+  }
+}
