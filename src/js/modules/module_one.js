@@ -1,4 +1,4 @@
 
 export function greetUser(node, name){
-    node.innerText = 'Hi ' + name;
+    node.innerText = 'Hello ' + name + '!!';
 }

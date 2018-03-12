@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "reload-browser",
+	"sources": [
+		"src/scss/app.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,EAAE,AAAA,CACE,KAAK,CAAE,IAAI,CACd"
+}

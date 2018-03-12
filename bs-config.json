@@ -1,5 +1,9 @@
 {
     "port": 8000,
-    "files": ["./src/**/*.{html,htm,css,js}"],
+    "files": [
+        "./build/**/*.html",
+        "./build/**/*.css",
+        "./build/**/*.js"
+    ],
     "server": { "baseDir": "./build" }
 }
