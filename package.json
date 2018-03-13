@@ -12,7 +12,6 @@
     "compile-js": "rollup -c",
     "launch": "run-p serve watch:*",
     "serve": "lite-server -c bs-config.json -w 'build/app.css'",
-    "watch": "run-p watch:* ",
     "watch:html": "watch -p \"src/*.html\" -c \"npm run copy-html\" ",
     "watch:css": "watch -p \"src/scss/*.scss\" -c \"npm run compile-css\" ",
     "watch:js": "watch -p \"src/js/**/*.js\" -c \"npm run compile-js\" "
