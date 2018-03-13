@@ -1,7 +1,7 @@
 {
-  "name": "es6_rollup_seed",
+  "name": "es6_rollup_build_tool",
   "version": "1.0.0",
-  "description": "an npm build environment that implements rollup.js",
+  "description": "an es6 build environment that implements rollup.js",
   "scripts": {
     "test": "npm run test",
     "start": "run-s create-folders copy-html copy-images compile-css compile-js launch",
@@ -18,20 +18,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sean-olson/build_environments.git"
+    "url": "git+https://github.com/sean-olson/es6_rollup_build_tool.git"
   },
   "keywords": [
     "rollup",
     "build",
     "tool",
-    "npm"
+    "npm",
+    "es6"
   ],
   "author": "Sean Olson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sean-olson/build_environments/issues"
+    "url": "https://github.com/sean-olson/es6_rollup_build_tool/issues"
   },
-  "homepage": "https://github.com/sean-olson/build_environments#readme",
+  "homepage": "https://github.com/sean-olson/es6_rollup_build_tool#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
