@@ -21,7 +21,12 @@ export default {
         exclude: 'node_modules/**',
         babelrc: false,
         presets: [
-            ["env", { "modules": false }]
+            ["env", { 
+                "modules": false, 
+                "targets": {
+                    "browsers": ["last 2 versions", "safari >= 7", "ie >= 11"]
+                } 
+            }],
         ],
         plugins: [
             'external-helpers'
