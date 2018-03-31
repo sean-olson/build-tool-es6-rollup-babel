@@ -1,2 +1,2 @@
-# rollup_build_tool
-an npm build environment that implements rollup.js
+# ES6 Rollup Build Tool
+A simple build tool using npm and Rollup.js  It provides support for ES6 module syntax along with other basic dev environment functionality.

@@ -8,16 +8,16 @@
     "create-folders": "mkdirp build/js build/css build/img build/libs build/fonts",
     "copy-html": "cpx src/*.html build",
     "copy-images": "cpx src/img/*.* build/img",
-    "copy-libs": "cpx src/libs/*.* build/libs",
-    "copy-fonts": "cpx src/fonts/*.* build/fonts",
+    "copy-libs": "cpx src/libs/**/*.* build/libs",
+    "copy-fonts": "cpx src/fonts/**/*.* build/fonts",
     "compile-css": "node-sass --output-style compressed --source-map true src/scss/app.scss --output build/css",
     "compile-js": "rollup -c",
     "launch": "run-p serve watch:*",
     "serve": "lite-server -c bs-config.json -w 'build/app.css'",
     "watch": "run-p watch:* ",
     "watch:html": "watch -p \"src/*.html\" -c \"npm run copy-html\" ",
-    "watch:css": "watch -p \"src/scss/*.scss\" -c \"npm run compile-css\" ",
-    "watch:js": "watch -p \"src/js/**.js\" -c \"npm run compile-js\" "
+    "watch:css": "watch -p \"src/scss/**/*.scss\" -c \"npm run compile-css\" ",
+    "watch:js": "watch -p \"src/js/**/*.js\" -c \"npm run compile-js\" "
   },
   "repository": {
     "type": "git",
