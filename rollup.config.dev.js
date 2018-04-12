@@ -5,9 +5,10 @@ import replace from 'rollup-plugin-replace';
 
 export default {
     entry: './src/js/app.js',
-    sourceMap: 'inline' ,
+    sourceMap: true,
+    treeshake: true,
     output: {
-        file: './build/js/app.js',
+        file: './dev/js/app.js',
         format: 'iife'
     },
     plugins: [

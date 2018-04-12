@@ -1,9 +1,9 @@
 {
     "port": 8080,
     "files": [
-        "./build/**/*.html",
-        "./build/**/*.css",
-        "./build/**/*.js"
+        "./dev/**/*.html",
+        "./dev/**/*.css",
+        "./dev/**/*.js"
     ],
-    "server": { "baseDir": "./build" }
+    "server": { "baseDir": "./dev" }
 }

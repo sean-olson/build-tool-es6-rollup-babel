@@ -5,19 +5,27 @@
   "scripts": {
     "test": "npm run test",
     "start": "run-s create-folders copy-html copy-images  copy-libs copy-fonts compile-css compile-js launch",
-    "create-folders": "mkdirp build/js build/css build/img build/libs build/fonts",
-    "copy-html": "cpx src/*.html build",
-    "copy-images": "cpx src/img/*.* build/img",
-    "copy-libs": "cpx src/libs/**/*.* build/libs",
-    "copy-fonts": "cpx src/fonts/**/*.* build/fonts",
-    "compile-css": "node-sass --output-style compressed --source-map true src/scss/app.scss --output build/css",
-    "compile-js": "rollup -c",
+    "create-folders": "mkdirp dev/js dev/css dev/img dev/libs dev/fonts",
+    "copy-html": "cpx src/*.html dev",
+    "copy-images": "cpx src/img/*.* dev/img",
+    "copy-libs": "cpx src/libs/**/*.* dev/libs",
+    "copy-fonts": "cpx src/fonts/**/*.* dev/fonts",
+    "compile-css": "node-sass --output-style compressed --source-map true src/scss/app.scss --output dev/css",
+    "compile-js": "rollup -c rollup.config.dev.js",
     "launch": "run-p serve watch:*",
-    "serve": "lite-server -c bs-config.json -w 'build/app.css'",
+    "serve": "lite-server -c bs-config.json -w 'dev/app.css'",
     "watch": "run-p watch:* ",
     "watch:html": "watch -p \"src/*.html\" -c \"npm run copy-html\" ",
     "watch:css": "watch -p \"src/scss/**/*.scss\" -c \"npm run compile-css\" ",
-    "watch:js": "watch -p \"src/js/**/*.js\" -c \"npm run compile-js\" "
+    "watch:js": "watch -p \"src/js/**/*.js\" -c \"npm run compile-js\" ",
+    "build-dist": "run-s dist:create-folders dist:copy-html dist:copy-images  dist:copy-libs dist:copy-fonts dist:compile-css dist:compile-js",
+    "dist:create-folders": "mkdirp dist/js dist/css dist/img dist/libs dist/fonts",
+    "dist:copy-html": "cpx src/*.html dist",
+    "dist:copy-images": "cpx src/img/*.* dist/img",
+    "dist:copy-libs": "cpx src/libs/**/*.* dist/libs",
+    "dist:copy-fonts": "cpx src/fonts/**/*.* dist/fonts",
+    "dist:compile-css": "node-sass --output-style compressed --source-map true src/scss/app.scss --output dist/css",
+    "dist:compile-js": "rollup -c rollup.config.dist.js"
   },
   "repository": {
     "type": "git",
@@ -50,5 +58,8 @@
     "rollup-plugin-node-resolve": "^3.2.0",
     "rollup-plugin-replace": "^2.0.0",
     "watch-cli": "^0.2.3"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
   }
 }
