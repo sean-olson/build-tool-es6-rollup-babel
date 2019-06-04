@@ -45,21 +45,17 @@
   },
   "homepage": "https://github.com/sean-olson/es6_rollup_build_tool#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.6.1",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-external-helpers": "^7.2.0",
     "cpx": "^1.5.0",
-    "lite-server": "^2.3.0",
-    "node-sass": "^4.7.2",
-    "npm-run-all": "^4.1.2",
-    "rollup": "^0.56.5",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-commonjs": "^9.0.0",
-    "rollup-plugin-node-resolve": "^3.2.0",
-    "rollup-plugin-replace": "^2.0.0",
+    "lite-server": "^2.5.3",
+    "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.13.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.1",
+    "rollup-plugin-replace": "^2.2.0",
     "watch-cli": "^0.2.3"
-  },
-  "dependencies": {
-    "jquery": "^3.3.1"
   }
 }

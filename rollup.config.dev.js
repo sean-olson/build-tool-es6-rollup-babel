@@ -4,8 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
 
 export default {
-    entry: './src/js/app.js',
-    sourceMap: true,
+    input: './src/js/app.js',
     treeshake: true,
     output: {
         file: './dev/js/app.js',
@@ -13,26 +12,12 @@ export default {
     },
     plugins: [
       resolve({
-        jsnext: true,
-        main: true,
-        browser: true
+        mainFields: ['module', 'main', 'browser'],
+        extensions: [ '.mjs', '.js', '.jsx', '.json' ],
+        preferBuiltins: true,
       }),
       commonjs(),
-      babel({
-        exclude: 'node_modules/**',
-        babelrc: false,
-        presets: [
-            ["env", { 
-                "modules": false, 
-                "targets": {
-                    "browsers": ["last 2 versions", "safari >= 7", "ie >= 11"]
-                } 
-            }],
-        ],
-        plugins: [
-            'external-helpers'
-        ],
-    }),
+      babel(),
       replace({
         ENV: JSON.stringify(process.env.NODE_ENV || 'development')
       })    
