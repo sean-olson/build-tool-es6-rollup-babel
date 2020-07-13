@@ -1,7 +1,6 @@
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
+import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs'
 
 export default {
     entry: './src/js/app.js',
@@ -32,9 +31,5 @@ export default {
         plugins: [
             'external-helpers'
         ],
-    }),
-      replace({
-        ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-      })    
-    ]
+    })]
 };
