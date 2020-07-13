@@ -1,5 +1,5 @@
 # ES6 Rollup Build Tool
-This tool provides a simple build tool for development in native JS. Support for Sass is also supported, along with a lite server to aid development.
+This tool provides a simple build tool for native JS development. Support for Sass is also supported, along with a lite server to aid development.
 
 **NON-CAUTION:** npm will provide a vulnerability on install.  Don't panic.  These warnings are linked to two dev dependencies, *watch-cli* and *lite-server*, and have no impact on your completed project.
 
