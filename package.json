@@ -17,7 +17,7 @@
     "watch:scss": "watch -p \"src/scss/**/*.scss\" -c \"npm run compile-scss\" ",
     "watch:img": "watch -p \"src/img/**/*.*\" -c \"npm run copy-images\" ",
     "watch:js": "watch -p \"src/js/**/*.js\" -c \"npm run compile-js\" ",
-    "build-dist": "run-s dist:create-folders dist:copy-html dist:copy-images dist:compile-scss dist:compile-js",
+    "build": "run-s dist:create-folders dist:copy-html dist:copy-images dist:compile-scss dist:compile-js",
     "dist:create-folders": "mkdirp dist/js dist/css dist/img",
     "dist:copy-html": "cpx src/*.html dist",
     "dist:copy-images": "cpx src/img/**/*.* dist/img",
