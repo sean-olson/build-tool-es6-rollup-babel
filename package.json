@@ -12,7 +12,7 @@
     "compile-scss": "sass --style=compressed --source-map src/scss/app.scss:dev/css/app.css",
     "compile-js": "rollup -c rollup.config.dev.js",
     "launch": "run-p serve watch:*",
-    "serve": "browser-sync start --server dev --files 'dev/**/*' --port 3000 --no-notify --no-open",
+    "serve": "browser-sync start --server dev --files 'dev/**/*' --port 3000 --no-notify",
     "watch": "run-p watch:*",
     "watch:html": "chokidar \"src/*.html\" -c \"npm run copy-html\"",
     "watch:scss": "chokidar \"src/scss/**/*.scss\" -c \"npm run compile-scss\"",
