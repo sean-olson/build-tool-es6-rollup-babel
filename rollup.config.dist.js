@@ -1,35 +1,43 @@
 import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs'
+import commonjs from '@rollup/plugin-commonjs';
+import terser from '@rollup/plugin-terser';
 
 export default {
-    entry: './src/js/app.js',
-    sourcemap: false,
+    input: './src/js/app.js',
     treeshake: true,
     output: {
         file: './dist/js/app.js',
-        format: 'iife'
+        format: 'iife',
+        name: 'App',
+        sourcemap: false        
     },
     plugins: [
-      resolve({
-        jsnext: true,
-        main: true,
-        browser: true
-      }),
-      commonjs(),
-      babel({
-        exclude: 'node_modules/**',
-        babelrc: false,
-        presets: [
-            ["env", { 
-                "modules": false, 
-                "targets": {
-                    "browsers": ["last 2 versions", "safari >= 7", "ie >= 11"]
-                } 
-            }],
-        ],
-        plugins: [
-            'external-helpers'
-        ],
-    })]
+        resolve({
+            browser: true,
+            preferBuiltins: false
+        }),
+        commonjs(),
+        babel({
+            exclude: 'node_modules/**',
+            babelHelpers: 'bundled',
+            babelrc: false,
+            presets: [
+                ["@babel/preset-env", { 
+                    "modules": false,
+                    "useBuiltIns": "usage",
+                    "corejs": 3
+                }]
+            ]
+        }),
+        terser({
+            format: {
+                comments: false
+            },
+            compress: {
+                drop_console: true,
+                drop_debugger: true
+            }
+        })        
+    ]
 };

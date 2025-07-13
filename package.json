@@ -1,27 +1,28 @@
 {
   "name": "es6_rollup_build_tool",
   "version": "1.0.0",
-  "description": "an es6 build environment that implements rollup.js",
+  "description": "An es6 build environment for folks who like to build JavaScript apps without a framework",
+  "type": "module",
   "scripts": {
     "test": "npm run test",
     "dev": "run-s create-folders copy-html copy-images compile-scss compile-js launch",
     "create-folders": "mkdirp dev/js dev/css dev/img",
     "copy-html": "cpx src/*.html dev",
     "copy-images": "cpx src/img/**/*.* dev/img",
-    "compile-scss": "node-sass --output-style compressed --source-map true src/scss/app.scss --output dev/css",
+    "compile-scss": "sass --style=compressed --source-map src/scss/app.scss:dev/css/app.css",
     "compile-js": "rollup -c rollup.config.dev.js",
     "launch": "run-p serve watch:*",
-    "serve": "lite-server -c bs-config.json -w 'dev/app.css'",
-    "watch": "run-p watch:* ",
-    "watch:html": "watch -p \"src/*.html\" -c \"npm run copy-html\" ",
-    "watch:scss": "watch -p \"src/scss/**/*.scss\" -c \"npm run compile-scss\" ",
-    "watch:img": "watch -p \"src/img/**/*.*\" -c \"npm run copy-images\" ",
-    "watch:js": "watch -p \"src/js/**/*.js\" -c \"npm run compile-js\" ",
+    "serve": "browser-sync start --server dev --files 'dev/**/*' --port 3000 --no-notify --no-open",
+    "watch": "run-p watch:*",
+    "watch:html": "chokidar \"src/*.html\" -c \"npm run copy-html\"",
+    "watch:scss": "chokidar \"src/scss/**/*.scss\" -c \"npm run compile-scss\"",
+    "watch:img": "chokidar \"src/img/**/*.*\" -c \"npm run copy-images\"",
+    "watch:js": "chokidar \"src/js/**/*.js\" -c \"npm run compile-js\"",
     "build": "run-s dist:create-folders dist:copy-html dist:copy-images dist:compile-scss dist:compile-js",
     "dist:create-folders": "mkdirp dist/js dist/css dist/img",
     "dist:copy-html": "cpx src/*.html dist",
     "dist:copy-images": "cpx src/img/**/*.* dist/img",
-    "dist:compile-scss": "node-sass --output-style compressed --source-map true src/scss/app.scss --output dist/css",
+    "dist:compile-scss": "sass --style=compressed --source-map src/scss/app.scss:dist/css/app.css",
     "dist:compile-js": "rollup -c rollup.config.dist.js"
   },
   "repository": {
@@ -42,17 +43,23 @@
   },
   "homepage": "https://github.com/sean-olson/es6_rollup_build_tool#readme",
   "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-external-helpers": "^7.10.4",
-    "@babel/preset-env": "^7.7.1",
-    "@rollup/plugin-babel": "^5.0.4",
-    "@rollup/plugin-commonjs": "^13.0.1",
-    "@rollup/plugin-node-resolve": "^8.4.0",
-    "cpx": "^1.5.0",
-    "lite-server": "^2.5.4",
-    "node-sass": "^4.13.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "browser-sync": "^3.0.4",
+    "chokidar-cli": "^3.0.0",
+    "cpx2": "^8.0.0",
+    "mkdirp": "^3.0.1",
     "npm-run-all": "^4.1.5",
-    "rollup": "^2.21.0",
-    "watch-cli": "^0.2.3"
-  }
+    "rollup": "^4.45.0",
+    "sass": "^1.89.2"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "> 0.5%"
+  ]
 }

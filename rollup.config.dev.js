@@ -8,14 +8,32 @@ export default {
     output: {
         file: './dev/js/app.js',
         format: 'iife',
+        name: 'App',
         sourcemap: true
     },
     plugins: [
       resolve({
-        mainFields: ['module', 'main', 'browser'],
-        extensions: [ '.mjs', '.js', '.jsx', '.json' ],
-        preferBuiltins: true,
+          browser: true,
+          preferBuiltins: false,
+          extensions: ['.mjs', '.js', '.jsx', '.json']
       }),
       commonjs(),
-      babel()]
+      babel({
+          exclude: 'node_modules/**',
+          babelHelpers: 'bundled',
+          babelrc: false,
+          presets: [
+              ["@babel/preset-env", { 
+                  "modules": false,
+                  "useBuiltIns": "usage",
+                  "corejs": 3,
+                  "debug": false // Set to true if you want to see what's being transpiled
+              }]
+          ]
+      }),      
+    ],
+    watch: {
+        include: 'src/js/**',
+        exclude: 'node_modules/**'
+    }    
 };
