@@ -7,6 +7,7 @@ A modern ES6 build environment for developers who want to build JavaScript appli
 - **Modern ES6+ Support** - Write modern JavaScript with automatic transpilation
 - **Live Development Server** - Auto-reloading development server with file watching
 - **SCSS Compilation** - Compile and watch SCSS files with source maps
+- **Environment Variable Management** - Flexible configuration for different environments
 - **Optimized Production Builds** - Minified, tree-shaken bundles for production
 - **Zero Configuration** - Works out of the box with sensible defaults
 - **Modern Browser Targets** - Supports last 2 versions of major browsers
@@ -22,15 +23,20 @@ A modern ES6 build environment for developers who want to build JavaScript appli
 2. **Install dependencies**
    ```bash
    npm install
-   npm install --save-dev core-js@3
    ```
 
-3. **Start development**
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your configuration
+   ```
+
+4. **Start development**
    ```bash
    npm run dev
    ```
 
-4. **Build for production**
+5. **Build for production**
    ```bash
    npm run build
    ```
@@ -48,7 +54,130 @@ src/
 
 dev/                    # Development build output
 dist/                   # Production build output
+
+# Environment Configuration
+.env.example            # Template for environment variables
+.env.development        # Development environment settings
+.env.production         # Production environment settings
+.env.local              # Local overrides (gitignored)
 ```
+
+## Environment Variables
+
+The build tool supports flexible environment variable management for different deployment scenarios. Environment variables are injected into your JavaScript code at build time using `@rollup/plugin-replace`.
+
+### Environment Files
+
+The build system loads environment variables from multiple files in this order:
+
+1. **`.env.{environment}`** - Environment-specific variables
+   - `.env.development` - Loaded during development
+   - `.env.production` - Loaded during production builds
+   - `.env.test` - Loaded during testing
+
+2. **`.env.local`** - Local overrides (development only)
+   - Overrides any variables from environment-specific files
+   - Should be added to `.gitignore` (already configured)
+   - Used for local development customization
+
+### Available Variables
+
+The following environment variables are automatically replaced in your JavaScript code:
+
+- `process.env.NODE_ENV` - Current environment (development/production)
+- `process.env.API_URL` - API endpoint URL
+- `process.env.DB_URL` - Database connection URL
+- `process.env.DEBUG_MODE` - Enable/disable debug mode
+- `process.env.APP_NAME` - Application name
+- `process.env.VERSION` - Application version
+
+### Setting Up Environment Variables
+
+1. **Copy the example file:**
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. **Edit `.env.local` with your local settings:**
+   ```bash
+   API_URL=http://localhost:3001/api
+   DB_URL=http://localhost:5432
+   DEBUG_MODE=true
+   APP_NAME=MyApp Local
+   VERSION=1.0.0-local
+   ```
+
+3. **Create environment-specific files as needed:**
+   ```bash
+   # .env.development
+   API_URL=https://dev-api.example.com
+   DEBUG_MODE=true
+   APP_NAME=MyApp Development
+   
+   # .env.production
+   API_URL=https://api.example.com
+   DEBUG_MODE=false
+   APP_NAME=MyApp
+   ```
+
+### Using Environment Variables in Code
+
+Environment variables are available in your JavaScript code as compile-time constants:
+
+```javascript
+// API configuration
+const apiUrl = process.env.API_URL;
+const isDebugMode = process.env.DEBUG_MODE === 'true';
+
+// Conditional code based on environment
+if (process.env.NODE_ENV === 'development') {
+    console.log('Running in development mode');
+}
+
+// App configuration
+const appConfig = {
+    name: process.env.APP_NAME,
+    version: process.env.VERSION,
+    apiUrl: process.env.API_URL,
+    debug: process.env.DEBUG_MODE === 'true'
+};
+```
+
+### Adding New Environment Variables
+
+To add new environment variables:
+
+1. **Update the Rollup configurations** (`rollup.config.dev.js` and `rollup.config.dist.js`):
+   ```javascript
+   replace({
+       preventAssignment: true,
+       values: {
+           // ... existing variables
+           'process.env.YOUR_NEW_VAR': JSON.stringify(process.env.YOUR_NEW_VAR),
+       }
+   })
+   ```
+
+2. **Add to your environment files:**
+   ```bash
+   # .env.example
+   YOUR_NEW_VAR=example-value
+   
+   # .env.local
+   YOUR_NEW_VAR=local-value
+   ```
+
+3. **Use in your JavaScript code:**
+   ```javascript
+   const myVar = process.env.YOUR_NEW_VAR;
+   ```
+
+### Environment Security
+
+- **Never commit sensitive data** to version control
+- **Use `.env.local`** for sensitive local development variables
+- **Add `.env.production`** to `.gitignore` if it contains sensitive data
+- **Use separate environment files** for different deployment stages
 
 ## Available Scripts
 
@@ -87,12 +216,14 @@ Two separate configurations are provided:
 - Source maps enabled for debugging
 - Fast rebuilds with file watching
 - Unminified output for development
+- Loads `.env.development` and `.env.local`
 
 #### Production (`rollup.config.dist.js`)
 - Minified output with Terser
 - Tree-shaking enabled
 - Console and debugger statements removed
 - Optimized for file size and performance
+- Loads `.env.production` only
 
 ## Development Workflow
 
@@ -160,7 +291,7 @@ Edit the Rollup configuration files:
 - **Terser** - JavaScript minifier
 
 ### Development Tools
-- **sirv-cli** - Development server with live reload
+- **browser-sync** - Development server with live reload
 - **chokidar-cli** - File watching
 - **npm-run-all** - Run multiple npm scripts
 
