@@ -1,4 +1,4 @@
-# ES6 Rollup Build Tool
+# ES6+ Rollup Build Tool
 
 A modern ES6 build environment for developers who want to build JavaScript applications without the overhead of a framework. This tool provides a complete development workflow with live reloading, SCSS compilation, and optimized production builds using Rollup.js and Babel.
 
