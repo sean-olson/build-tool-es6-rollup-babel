@@ -3,3 +3,8 @@ dev/
 dist/
 coverage/
 .DS_Store
+
+# Environment files
+.env.local
+.env.production
+.env.*.local
